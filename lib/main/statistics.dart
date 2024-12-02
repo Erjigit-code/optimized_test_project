@@ -5,12 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_transport_budget_95t/cubit/expense_cubit.dart';
 import 'package:my_transport_budget_95t/cubit/expense_state.dart';
-import 'package:my_transport_budget_95t/models/expense.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 
 class GraphScreen extends StatelessWidget {
-  const GraphScreen({Key? key}) : super(key: key);
+  const GraphScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -100,17 +98,17 @@ class GraphScreen extends StatelessWidget {
                             isCurved: true,
                             color: Colors.blue,
                             barWidth: 3,
-                            dotData: FlDotData(show: false),
+                            dotData: const FlDotData(show: false),
                             belowBarData: BarAreaData(
                               show: true,
                               color: Colors.blue.withOpacity(0.3),
                             ),
                           ),
                         ],
-                        gridData:
-                            FlGridData(show: true, drawVerticalLine: false),
+                        gridData: const FlGridData(
+                            show: true, drawVerticalLine: false),
                         titlesData: FlTitlesData(
-                          leftTitles: AxisTitles(
+                          leftTitles: const AxisTitles(
                             sideTitles:
                                 SideTitles(showTitles: true, reservedSize: 40),
                           ),
@@ -130,9 +128,9 @@ class GraphScreen extends StatelessWidget {
                               },
                             ),
                           ),
-                          topTitles: AxisTitles(
+                          topTitles: const AxisTitles(
                               sideTitles: SideTitles(showTitles: false)),
-                          rightTitles: AxisTitles(
+                          rightTitles: const AxisTitles(
                               sideTitles: SideTitles(showTitles: false)),
                         ),
                         borderData: FlBorderData(show: false),
@@ -143,7 +141,7 @@ class GraphScreen extends StatelessWidget {
                       child: Text(
                         'No data available',
                         style: TextStyle(
-                          color: Colors.white.withOpacity(0.6),
+                          color: Colors.grey,
                           fontSize: 14.sp,
                         ),
                       ),
@@ -212,7 +210,7 @@ class GraphScreen extends StatelessWidget {
                       child: Text(
                         'No data available',
                         style: TextStyle(
-                          color: Colors.white.withOpacity(0.6),
+                          color: Colors.grey,
                           fontSize: 14.sp,
                         ),
                       ),
@@ -284,9 +282,9 @@ class GraphScreen extends StatelessWidget {
                                 1.2
                             : 10,
                         barGroups: barData,
-                        gridData: FlGridData(show: false),
+                        gridData: const FlGridData(show: false),
                         titlesData: FlTitlesData(
-                          leftTitles: AxisTitles(
+                          leftTitles: const AxisTitles(
                             sideTitles: SideTitles(showTitles: false),
                           ),
                           bottomTitles: AxisTitles(
@@ -313,9 +311,9 @@ class GraphScreen extends StatelessWidget {
                               },
                             ),
                           ),
-                          topTitles: AxisTitles(
+                          topTitles: const AxisTitles(
                               sideTitles: SideTitles(showTitles: false)),
-                          rightTitles: AxisTitles(
+                          rightTitles: const AxisTitles(
                               sideTitles: SideTitles(showTitles: false)),
                         ),
                         borderData: FlBorderData(show: false),
@@ -326,7 +324,7 @@ class GraphScreen extends StatelessWidget {
                       child: Text(
                         'No data available',
                         style: TextStyle(
-                          color: Colors.white.withOpacity(0.6),
+                          color: Colors.grey,
                           fontSize: 14.sp,
                         ),
                       ),

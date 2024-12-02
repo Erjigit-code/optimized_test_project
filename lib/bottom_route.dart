@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:my_transport_budget_95t/main/main_screen.dart';
-import 'package:my_transport_budget_95t/settings/settings_view.dart';
 
 class ButtomRoute extends StatefulWidget {
   const ButtomRoute({super.key});
@@ -15,17 +14,41 @@ class _ButtomRouteState extends State<ButtomRoute> {
   int selectedIndex = 0;
 
   final List<Widget> _widgetOptions = <Widget>[
-    MainScreen(),
-    Text("sdfgbsdbf"),
-    Text("sdfgbsdbf"),
-    Text('kfgno')
-    // const SettingsView(),
+    const MainScreen(),
+    const Text("Screen 2"),
+    const Text("Screen 3"),
+    const Text('Settings Screen'),
   ];
+
+  // Кеширование иконок
+  late final Map<String, Widget> _iconCache;
+
+  @override
+  void initState() {
+    super.initState();
+    _iconCache = {
+      'Chart': _buildCachedSvg('assets/svg/Chart.svg'),
+      'Routing 4': _buildCachedSvg('assets/svg/Routing 4.svg'),
+      'Globus': _buildCachedSvg('assets/svg/Globus.svg'),
+      'Settings': _buildCachedSvg('assets/svg/Settings.svg'),
+    };
+  }
+
+  Widget _buildCachedSvg(String assetName) {
+    return SvgPicture.asset(
+      assetName,
+      width: 24.w,
+      fit: BoxFit.contain,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _widgetOptions.elementAt(selectedIndex),
+      body: IndexedStack(
+        index: selectedIndex,
+        children: _widgetOptions,
+      ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: const Color(0xff121213),
         elevation: 0,
@@ -42,25 +65,26 @@ class _ButtomRouteState extends State<ButtomRoute> {
     );
   }
 
-  BottomNavigationBarItem _buildBottomNavItem(
-    String svgName,
-    int index,
-  ) {
+  BottomNavigationBarItem _buildBottomNavItem(String svgName, int index) {
     return BottomNavigationBarItem(
-      icon: SvgPicture.asset(
-        'assets/svg/$svgName.svg',
-        width: 24.w,
-        color: selectedIndex == index
-            ? const Color(0xff000DFF)
-            : const Color(0xffFFFFFF).withOpacity(0.6),
+      icon: RepaintBoundary(
+        child: ColorFiltered(
+          colorFilter: ColorFilter.mode(
+            selectedIndex == index ? const Color(0xff000DFF) : Colors.grey,
+            BlendMode.srcIn,
+          ),
+          child: _iconCache[svgName]!,
+        ),
       ),
       label: '',
     );
   }
 
   void _onItemTapped(int index) {
-    setState(() {
-      selectedIndex = index;
-    });
+    if (selectedIndex != index) {
+      setState(() {
+        selectedIndex = index;
+      });
+    }
   }
 }

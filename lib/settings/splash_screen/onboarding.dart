@@ -77,7 +77,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 if (currentPage == onboardingData.length - 1) {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => PremiumScreen()),
+                    MaterialPageRoute(
+                        builder: (context) => const PremiumScreen()),
                   );
                 } else {
                   _pageController.nextPage(
